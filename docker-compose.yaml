@@ -1,0 +1,33 @@
+
+
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: online_blog
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Niraz123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  web:
+    build: .
+    command: >
+      sh -c "python manage.py migrate &&
+             gunicorn online_blog.wsgi:application --bind 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=1
+      - DATABASE_URL=postgresql://postgres:Niraz123@db:5432/online_blog
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
+  
