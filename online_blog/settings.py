@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-m$l(%ad0p#3!8qzq(t+nbnz%vp)3p#q@i%al+-*794t5a5&#9n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*').split(',')
 
 
 # Application definition
@@ -93,12 +93,13 @@ WSGI_APPLICATION = 'online_blog.wsgi.application'
 # }
 
 
-
+import os
 import dj_database_url
 
 DATABASES = {
     'default': {
-        "default": dj_database_url.config(config('DATABASE_URL'))
+        "default": dj_database_url.config(
+        default=os.getenv("DATABASE_URL"))
     }
 }
 
