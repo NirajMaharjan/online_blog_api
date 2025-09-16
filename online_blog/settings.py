@@ -81,14 +81,24 @@ WSGI_APPLICATION = 'online_blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config('DB_NAME', default='online_blog'),
+#         'USER': config('DB_USER', default='postgres'),
+#         'PASSWORD': config('DB_PASSWORD', default='Niraz123'),
+#         'HOST': config('DB_HOST', default='db'),
+#         'PORT': config('DB_PORT', default='5432'),
+#     }
+# }
+
+
+
+import dj_database_url
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME', default='online_blog'),
-        'USER': config('DB_USER', default='postgres'),
-        'PASSWORD': config('DB_PASSWORD', default='Niraz123'),
-        'HOST': config('DB_HOST', default='db'),
-        'PORT': config('DB_PORT', default='5432'),
+        "default": dj_database_url.config(default=os.getenv("DATABASE_URL"))
     }
 }
 
