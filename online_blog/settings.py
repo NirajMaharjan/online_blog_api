@@ -96,11 +96,11 @@ WSGI_APPLICATION = 'online_blog.wsgi.application'
 import os
 import dj_database_url
 
+load_dotenv()
 DATABASES = {
-    'default': {
-        "default": dj_database_url.config(
+    "default": dj_database_url.config(
         default=os.getenv("DATABASE_URL"))
-    }
+    
 }
 
 
