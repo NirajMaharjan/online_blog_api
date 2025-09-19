@@ -27,7 +27,7 @@ COPY . .
 # CMD ["gunicorn", "online_blog.wsgi:application", "--bind", "0.0.0.0:8000"]
 
 # Expose port (Railway will set $PORT)
-EXPOSE $PORT
+EXPOSE 8080
 
 # Run migrations and start server
-CMD ["sh", "-c", "python manage.py migrate && gunicorn online_blog.wsgi:application --bind 0.0.0.0:$PORT"]
+CMD ["sh", "-c", "python manage.py migrate && gunicorn online_blog.wsgi:application --bind 0.0.0.0:8080"]
